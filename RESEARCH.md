@@ -75,6 +75,20 @@ factorization, not learning signal, is the bottleneck) and H3 (no
 cross-family transfer) point to where learning could still help: guidance
 inside SA or amortized across instance distributions.
 
+**Baseline pipeline established** (tnco/, julia/, eval/; Python 3.14 venv
+via uv, Julia 1.11.5 + OMEinsumContractionOrders). Shared instance/tree
+JSON format; independent exact Python checker reproduces Julia's tc/sc/rwc
+exactly on all runs so far (negative control passes; sc convention = max
+contraction-step output, inputs excluded). Protected suite: 6 exact-track
+instances (n=20) + 14 main-track (n up to 200; random-regular, ER,
+lattices; chi in {2,16}). First results: TreeSA (pure-tc scorer,
+ntrials=10, niters=50) **matches ExhaustiveSearch on all six n=20
+instances** (H1 confirmed at small n: no quality headroom there); greedy
+is far off on hard main-track instances (e.g. ER n=100: tc 92.0 vs
+TreeSA 60.6; rr n=100 chi=16: 116.0 vs 75.7). Quality headroom for a
+learned method, if it exists, is at larger n where TreeSA is no longer
+provably optimal.
+
 **Next investment:** baseline pipeline + protected evaluation suite, then
 the cheap H1/H4 tests (TreeSA cost-vs-time curves on benchmark instances)
 before building any learned component. Candidate directions ranked in

@@ -1,0 +1,24 @@
+{
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-astra",
+  "defaultThinkingLevel": "high",
+  "defaultTools": ["read", "bash", "edit", "write"],
+  "packages": [
+    {
+      "source": "git:github.com/QuantumBFS/sci-brain",
+      "autoload": false,
+      "extensions": ["!**/*"],
+      "skills": ["!**/*"],
+      "prompts": ["!**/*"],
+      "themes": ["!**/*"]
+    },
+    {
+      "source": "https://github.com/ayghri/i-have-adhd",
+      "autoload": false,
+      "extensions": ["!**/*"],
+      "skills": ["!**/*"],
+      "prompts": ["!**/*"],
+      "themes": ["!**/*"]
+    }
+  ]
+}

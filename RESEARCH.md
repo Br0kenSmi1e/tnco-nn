@@ -19,6 +19,27 @@ against strong non-learned methods, including TreeSA, across relevant
 networks and seeds. Separate algorithmic gains (learned guidance) from
 implementation speedups and extra computation.
 
+## Cost convention (fixed)
+
+Primary metric: tc = log2 of total contraction work, counted as the sum
+over contraction steps of the product of the extents of all indices
+involved in the step (log2-sum-exp convention). No space-complexity
+constraint, no read-write weighting. sc and rw are recorded as
+diagnostics only.
+
+Fairness control: TreeSA's default ScoreFunction (OMEinsumContractionOrders
+v1.1.0, src/Core.jl) is tc_weight=1, sc_weight=1, rw_weight=0,
+sc_target=20 — i.e., pure tc plus a penalty on peak space above 2^20,
+which distorts tc search on hard instances (Sycamore m=20 has sc ~ 30).
+All baselines are therefore configured with a pure-tc scorer
+(ScoreFunction(tc_weight=1, sc_weight=0, rw_weight=0)). Comparing against
+default TreeSA would confound algorithmic gains with its space-penalty
+handicap.
+
+Published sliced/memory-constrained numbers (Pan & Zhang Sycamore; some
+cotengra benchmarks) use a different convention; cross-paper comparison
+only within the unsliced tc convention.
+
 ## Starting state
 
 Fresh project. No inherited algorithmic choices; the codebase is empty

@@ -1,0 +1,15 @@
+main__rr_n100_d3_c2_s0         ntrials= 10 niters= 50 work=   500 tc=21.9712 best=21.9712 t=7s
+main__rr_n100_d3_c2_s0         ntrials= 20 niters=100 work=  2000 tc=21.9583 best=21.9583 t=22s
+main__rr_n100_d3_c2_s0         ntrials= 40 niters=200 work=  8000 tc=21.9244 best=21.9244 t=86s
+main__rr_n100_d3_c2_s0         ntrials= 80 niters=400 work= 32000 tc=21.9236 best=21.9236 t=375s
+main__rr_n200_d3_c2_s0         ntrials= 10 niters= 50 work=   500 tc=32.0620 best=32.0620 t=15s
+main__rr_n200_d3_c2_s0         ntrials= 20 niters=100 work=  2000 tc=32.0592 best=32.0592 t=53s
+main__rr_n200_d3_c2_s0         ntrials= 40 niters=200 work=  8000 tc=32.0579 best=32.0579 t=206s
+main__rr_n200_d3_c2_s0         ntrials= 80 niters=400 work= 32000 tc=32.0592 best=32.0579 t=820s
+main__rr_n100_d3_c16_s0        ntrials= 10 niters= 50 work=   500 tc=75.7499 best=75.7499 t=7s
+main__rr_n100_d3_c16_s0        ntrials= 20 niters=100 work=  2000 tc=75.7500 best=75.7499 t=23s
+main__rr_n100_d3_c16_s0        ntrials= 40 niters=200 work=  8000 tc=75.7437 best=75.7437 t=84s
+main__rr_n100_d3_c16_s0        ntrials= 80 niters=400 work= 32000 tc=75.7432 best=75.7432 t=330s
+main__er_n100_p0.05_c2_s0      ntrials= 10 niters= 50 work=   500 tc=59.9449 best=59.9449 t=26s
+main__er_n100_p0.05_c2_s0      ntrials= 20 niters=100 work=  2000 tc=59.8559 best=59.8559 t=105s
+main__er_n100_p0.05_c2_s0      ntrials= 40 niters=200 work=  8000 tc=59.8095 best=59.8095 t=303s

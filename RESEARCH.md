@@ -89,7 +89,40 @@ TreeSA 60.6; rr n=100 chi=16: 116.0 vs 75.7). Quality headroom for a
 learned method, if it exists, is at larger n where TreeSA is no longer
 provably optimal.
 
-**Next investment:** baseline pipeline + protected evaluation suite, then
+**Experiment 1 — TreeSA saturation (H1 test).** Escalating budget
+(ntrials*niters = 500 -> 32000, 64x) on main-track instances improves tc by
+< 0.1 (rr_n100_d3: 21.971 -> 21.924; rr_n200_d3: 32.062 -> 32.058;
+rr_n100_d3_c16: 75.750 -> 75.743). TreeSA saturates almost immediately.
+Together with exact-optimality at n=20, this supports H1: TreeSA is likely
+near-optimal on these families at n <= 200; quality headroom for any method
+there is small (percent-level FLOPs).
+
+**Experiment 2 — imitation probe v1 (H2/H3 test).** EdgePolicy GNN
+(hidden 128, 6 MP layers, node/edge features incl. greedy score), trained
+30 epochs by teacher-forced imitation of TreeSA oracle action sequences
+(371 instances, random-regular/lattice/ER mix, n<=80; oracle budget
+ntrials=5, niters=100; 7/378 trees skipped for disjoint merges).
+Results (eval/results/policy_v1_eval.txt): clearly beats classical greedy
+(rr_n100: 22.9 vs 29.5; er_n100: 68.2 vs 92.0) but best-of-50 sampled
+rollouts remain 60-460% above TreeSA in FLOPs in-distribution, worse with
+size transfer (n=100), and collapse under extent transfer (chi=16: 10^7x).
+Interpretation: oracle mapping is partially learnable from little data, but
+per-step compounding error dominates at longer horizons. Candidate
+mechanisms: (a) multimodal single-oracle targets, (b) exposure bias from
+teacher forcing, (c) objective mismatch (per-step likelihood vs final tc),
+(d) capacity/features. 
+
+**Next investment:** expert-iteration / RL fine-tuning from the imitation
+init, optimizing tc directly against the exact oracle (sample k rollouts,
+reinforce best-of-k) — tests (b)+(c) cheaply. In parallel, extend
+saturation to larger n and higher-width families to size the remaining
+quality prize.
+
+**Open framing tension:** if saturation holds at larger n too, a pure
+quality win over TreeSA may not exist on these families; the fallback
+contribution is the amortization story or harder families (Sycamore-like).
+
+**Previous note:** baseline pipeline + protected evaluation suite, then
 the cheap H1/H4 tests (TreeSA cost-vs-time curves on benchmark instances)
 before building any learned component. Candidate directions ranked in
 docs/survey.md; current favorite is learned proposals inside TreeSA-style

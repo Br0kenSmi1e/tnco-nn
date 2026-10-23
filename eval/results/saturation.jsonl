@@ -1,0 +1,15 @@
+{"instance": "main__rr_n100_d3_c2_s0", "ntrials": 10, "niters": 50, "work": 500, "tc": 21.97118707963856, "best_tc_so_far": 21.97118707963856, "sc": 16.0, "elapsed_seconds": 7.151901006698608}
+{"instance": "main__rr_n100_d3_c2_s0", "ntrials": 20, "niters": 100, "work": 2000, "tc": 21.95827232777263, "best_tc_so_far": 21.95827232777263, "sc": 16.0, "elapsed_seconds": 21.607261896133423}
+{"instance": "main__rr_n100_d3_c2_s0", "ntrials": 40, "niters": 200, "work": 8000, "tc": 21.924409495509856, "best_tc_so_far": 21.924409495509856, "sc": 16.0, "elapsed_seconds": 85.59185194969177}
+{"instance": "main__rr_n100_d3_c2_s0", "ntrials": 80, "niters": 400, "work": 32000, "tc": 21.923585733132082, "best_tc_so_far": 21.923585733132082, "sc": 16.0, "elapsed_seconds": 375.4935870170593}
+{"instance": "main__rr_n200_d3_c2_s0", "ntrials": 10, "niters": 50, "work": 500, "tc": 32.061976730352676, "best_tc_so_far": 32.061976730352676, "sc": 26.0, "elapsed_seconds": 14.750850915908813}
+{"instance": "main__rr_n200_d3_c2_s0", "ntrials": 20, "niters": 100, "work": 2000, "tc": 32.0592359996846, "best_tc_so_far": 32.0592359996846, "sc": 26.0, "elapsed_seconds": 53.30695986747742}
+{"instance": "main__rr_n200_d3_c2_s0", "ntrials": 40, "niters": 200, "work": 8000, "tc": 32.05790919195836, "best_tc_so_far": 32.05790919195836, "sc": 26.0, "elapsed_seconds": 205.82964301109314}
+{"instance": "main__rr_n200_d3_c2_s0", "ntrials": 80, "niters": 400, "work": 32000, "tc": 32.05923638139546, "best_tc_so_far": 32.05790919195836, "sc": 26.0, "elapsed_seconds": 820.3878419399261}
+{"instance": "main__rr_n100_d3_c16_s0", "ntrials": 10, "niters": 50, "work": 500, "tc": 75.7499235284376, "best_tc_so_far": 75.7499235284376, "sc": 64.0, "elapsed_seconds": 7.351971864700317}
+{"instance": "main__rr_n100_d3_c16_s0", "ntrials": 20, "niters": 100, "work": 2000, "tc": 75.7500019650305, "best_tc_so_far": 75.7499235284376, "sc": 64.0, "elapsed_seconds": 23.29941701889038}
+{"instance": "main__rr_n100_d3_c16_s0", "ntrials": 40, "niters": 200, "work": 8000, "tc": 75.74365477842032, "best_tc_so_far": 75.74365477842032, "sc": 64.0, "elapsed_seconds": 84.09468197822571}
+{"instance": "main__rr_n100_d3_c16_s0", "ntrials": 80, "niters": 400, "work": 32000, "tc": 75.74321079418547, "best_tc_so_far": 75.74321079418547, "sc": 64.0, "elapsed_seconds": 330.21959400177}
+{"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 10, "niters": 50, "work": 500, "tc": 59.94490268483433, "best_tc_so_far": 59.94490268483433, "sc": 53.0, "elapsed_seconds": 26.4657039642334}
+{"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 20, "niters": 100, "work": 2000, "tc": 59.85590614675334, "best_tc_so_far": 59.85590614675334, "sc": 53.0, "elapsed_seconds": 105.29299092292786}
+{"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 40, "niters": 200, "work": 8000, "tc": 59.80948675330098, "best_tc_so_far": 59.80948675330098, "sc": 53.0, "elapsed_seconds": 302.82111287117004}

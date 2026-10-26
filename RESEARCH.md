@@ -118,6 +118,31 @@ reinforce best-of-k) — tests (b)+(c) cheaply. In parallel, extend
 saturation to larger n and higher-width families to size the remaining
 quality prize.
 
+**Experiment 3 — expert iteration (EI) fine-tune**
+(scripts/expert_iteration.py; 60 rounds, batch 64 instances x 16 rollouts,
+best-of-k self-imitation + 0.3 oracle anchor, ~15 min on RTX 4060 Ti).
+In-distribution gaps vs TreeSA roughly halved or better (rr_n60 s5000:
+155% -> 28% FLOPs; rr_n80 s5001: 460% -> 82%; rr_n100 s10: 850% -> 181%),
+but remain far from TreeSA, and family/extent transfer WORSENED (er_n100:
+2e4% -> 7e6%; chi=16: 1e7% -> 5e12%) — self-imitation narrows the policy.
+Reading: objective mismatch/exposure bias were real but partial causes;
+the end-to-end learned policy path converges to 'beats greedy, does not
+reach TreeSA' (RL-TNCO's story, reproduced cheaper). 
+
+**Experiment 4 — saturation at n=500 (running):** rr_n500_d3 shows a
+larger budget response than n<=200 (W=250: 71.94 -> W=1000: 71.15),
+the first observed instance where TreeSA is demonstrably not saturated.
+If learned-init + SA-polish beats greedy-init SA anywhere, it is at this
+scale.
+
+**Decision point:** the decisive experiment for the quality direction is
+now: policy-initialized SA vs greedy-initialized SA (TreeSA default) at
+matched iterations, on n=500-1000 instances. Requires custom-tree
+initializer support in the Julia runner. If learned init does not help
+even where TreeSA is not saturated, the quality direction closes as a
+well-established negative; remaining contributions would be amortization
+(equal quality, far lower planning cost) or mechanism understanding.
+
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
 contribution is the amortization story or harder families (Sycamore-like).

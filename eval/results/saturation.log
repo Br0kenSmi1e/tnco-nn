@@ -13,3 +13,8 @@ main__rr_n100_d3_c16_s0        ntrials= 80 niters=400 work= 32000 tc=75.7432 bes
 main__er_n100_p0.05_c2_s0      ntrials= 10 niters= 50 work=   500 tc=59.9449 best=59.9449 t=26s
 main__er_n100_p0.05_c2_s0      ntrials= 20 niters=100 work=  2000 tc=59.8559 best=59.8559 t=105s
 main__er_n100_p0.05_c2_s0      ntrials= 40 niters=200 work=  8000 tc=59.8095 best=59.8095 t=303s
+main__er_n100_p0.05_c2_s0      ntrials= 80 niters=400 work= 32000 tc=59.8095 best=59.8095 t=1148s
+main__lat_8x8_c2               ntrials= 10 niters= 50 work=   500 tc=14.8108 best=14.8108 t=5s
+main__lat_8x8_c2               ntrials= 20 niters=100 work=  2000 tc=14.8076 best=14.8076 t=14s
+main__lat_8x8_c2               ntrials= 40 niters=200 work=  8000 tc=14.8043 best=14.8043 t=49s
+main__lat_8x8_c2               ntrials= 80 niters=400 work= 32000 tc=14.8043 best=14.8043 t=194s

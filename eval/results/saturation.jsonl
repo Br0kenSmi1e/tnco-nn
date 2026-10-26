@@ -13,3 +13,8 @@
 {"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 10, "niters": 50, "work": 500, "tc": 59.94490268483433, "best_tc_so_far": 59.94490268483433, "sc": 53.0, "elapsed_seconds": 26.4657039642334}
 {"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 20, "niters": 100, "work": 2000, "tc": 59.85590614675334, "best_tc_so_far": 59.85590614675334, "sc": 53.0, "elapsed_seconds": 105.29299092292786}
 {"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 40, "niters": 200, "work": 8000, "tc": 59.80948675330098, "best_tc_so_far": 59.80948675330098, "sc": 53.0, "elapsed_seconds": 302.82111287117004}
+{"instance": "main__er_n100_p0.05_c2_s0", "ntrials": 80, "niters": 400, "work": 32000, "tc": 59.80948675454997, "best_tc_so_far": 59.80948675330098, "sc": 53.0, "elapsed_seconds": 1147.8942048549652}
+{"instance": "main__lat_8x8_c2", "ntrials": 10, "niters": 50, "work": 500, "tc": 14.8107724413447, "best_tc_so_far": 14.8107724413447, "sc": 8.0, "elapsed_seconds": 5.114001035690308}
+{"instance": "main__lat_8x8_c2", "ntrials": 20, "niters": 100, "work": 2000, "tc": 14.807556176858919, "best_tc_so_far": 14.807556176858919, "sc": 8.0, "elapsed_seconds": 13.910077095031738}
+{"instance": "main__lat_8x8_c2", "ntrials": 40, "niters": 200, "work": 8000, "tc": 14.804332726187615, "best_tc_so_far": 14.804332726187615, "sc": 8.0, "elapsed_seconds": 49.05679416656494}
+{"instance": "main__lat_8x8_c2", "ntrials": 80, "niters": 400, "work": 32000, "tc": 14.804332726187615, "best_tc_so_far": 14.804332726187615, "sc": 8.0, "elapsed_seconds": 193.54820799827576}

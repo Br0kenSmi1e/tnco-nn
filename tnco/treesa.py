@@ -19,6 +19,7 @@ def run_optimizer(
     ntrials: int = 10,
     niters: int = 50,
     timeout: float = 3600.0,
+    initializer: str = "greedy",
 ) -> dict:
     """Run a Julia optimizer; returns the result dict with keys
     tc, sc, rwc, tree, optimizer, seed, ntrials, niters, elapsed_seconds.
@@ -39,6 +40,7 @@ def run_optimizer(
             str(seed),
             str(ntrials),
             str(niters),
+            initializer,
         ]
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
         if proc.returncode != 0:

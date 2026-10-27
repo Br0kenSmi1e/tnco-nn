@@ -143,6 +143,20 @@ even where TreeSA is not saturated, the quality direction closes as a
 well-established negative; remaining contributions would be amortization
 (equal quality, far lower planning cost) or mechanism understanding.
 
+**Experiment 5 — saturation at scale and the init premise test.**
+Saturation is scale/width-dependent (best tc by budget W=250 -> 16000):
+rr_n500_d3: 71.94 -> 71.04; rr_n1000_d3: 137.1 -> 132.2 (still dropping);
+er_n200: 333.6 -> 322.8; rr_n500_d5: 253.5 -> 228.4; rr_n500_d3_c16: 283.5
+-> 272.7. High-width/hard instances are FAR from saturated — the quality
+prize exists there (SA is mixing-limited), not at n<=200.
+Premise test (rr_n500_d3, W=250/1000, seeds 11-12): random-init SA reaches
+the same tc as greedy-init SA (e.g. W=1000: 71.12/71.75 random vs
+71.20/71.14 greedy). On easy landscapes SA mixing is init-independent, so
+learned-INIT cannot help there. Init sensitivity on hard/unsaturated
+landscapes (n=1000, d5) is being tested before closing the init direction.
+If init never matters, the remaining quality mechanism is learned guidance
+of the SA DYNAMICS (move proposals), not the starting point.
+
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
 contribution is the amortization story or harder families (Sycamore-like).

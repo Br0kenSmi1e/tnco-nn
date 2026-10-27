@@ -7,6 +7,7 @@
 #     treesa : TreeSA with pure-tc scorer (ntrials, niters apply)
 #     greedy : GreedyMethod
 #     exact  : ExhaustiveSearch (small networks only)
+#   Optional ARGS[7]: TreeSA initializer (:greedy or :random)
 #
 # Instance JSON format (shared with the Python side):
 #   {"inputs": [[1,2],[2,3],...],   # tensor i has indices inputs[i]
@@ -31,6 +32,7 @@ opt_name = ARGS[3]
 seed    = length(ARGS) >= 4 ? parse(Int, ARGS[4]) : 42
 ntrials = length(ARGS) >= 5 ? parse(Int, ARGS[5]) : 10
 niters  = length(ARGS) >= 6 ? parse(Int, ARGS[6]) : 50
+initializer = length(ARGS) >= 7 ? Symbol(ARGS[7]) : :greedy
 
 Random.seed!(seed)
 
@@ -43,7 +45,7 @@ code = OECO.EinCode(inputs, output)
 
 optimizer = if opt_name == "treesa"
     # Pure-tc scorer: no space penalty, no read-write weighting.
-    TreeSA(; ntrials=ntrials, niters=niters,
+    TreeSA(; ntrials=ntrials, niters=niters, initializer=initializer,
            score=ScoreFunction(tc_weight=1.0, sc_weight=0.0, rw_weight=0.0))
 elseif opt_name == "greedy"
     GreedyMethod()
@@ -70,7 +72,7 @@ end
 result = Dict(
     "tc" => cc.tc, "sc" => cc.sc, "rwc" => cc.rwc,
     "tree" => to_tree(ne),
-    "optimizer" => opt_name, "seed" => seed,
+    "optimizer" => opt_name, "seed" => seed, "initializer" => String(initializer),
     "ntrials" => ntrials, "niters" => niters,
     "elapsed_seconds" => elapsed,
 )

@@ -157,6 +157,28 @@ landscapes (n=1000, d5) is being tested before closing the init direction.
 If init never matters, the remaining quality mechanism is learned guidance
 of the SA DYNAMICS (move proposals), not the starting point.
 
+**Experiment 6 — hybrid policy-init SA: a paradoxical negative**
+(scripts/hybrid_test.py, eval/results/hybrid_n500.log). rr_n500_d3, matched
+budgets, seeds 11-12. Policy best-of-50 init tree tc=104.4 (greedy init
+tc=132.0; random sequential tc~200): policy-init SA reaches 76.4 (W=250)
+and 73.8-75.5 (W=1000) — WORSE than greedy-init (71.5/71.2) and random-init
+(72.4/71.1). A 2^27x better starting tree HURTS. Hypotheses: (a) with
+initializer=:specified all ntrials start from the same tree (diversity
+loss), while greedy init varies per trial; (b) policy trees are deep but
+isolated optima — basin connectivity, not starting cost, determines SA
+outcome. Control running: single-chain (ntrials=1) comparisons with
+policy-best/policy-median/greedy inits (eval/results/hybrid_single_chain.log).
+Also: rr_n500_d5 init test shows random ~ greedy (234.5/238.6 vs
+241.7/238.0), i.e. no monotone init effect on rugged landscapes; only
+n=1000_d3 showed random-init clearly worse (138.6/138.8 vs 134.3/131.5).
+
+**If the single-chain control confirms (b), the learned-INIT direction is
+closed with mechanism. Remaining quality mechanism: learned move PROPOSALS
+in SA dynamics (target the mixing bottleneck on unsaturated landscapes),
+with training data self-generated from SA traces. Cheapest mechanism probe:
+hand-crafted proposal bias (e.g. cost-density-weighted subtree selection)
+before any NN.**
+
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
 contribution is the amortization story or harder families (Sycamore-like).

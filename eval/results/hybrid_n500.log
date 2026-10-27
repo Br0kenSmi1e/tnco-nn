@@ -1,0 +1,3 @@
+rr_n500_d3_c2_s0: policy init tc=104.383
+  policy-init SA W=250: ['76.385', '76.425']
+  policy-init SA W=1000: ['73.777', '75.543']

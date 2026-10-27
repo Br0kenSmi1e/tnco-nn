@@ -85,6 +85,23 @@ class ContractionState:
         return len(self.tensors) == 1
 
 
+def actions_to_tree(inst: Instance, actions: list[int]) -> list | int:
+    """Replay an action sequence, returning the contraction tree in the
+    shared nested-list format (leaf = tensor id, node = [left, right]).
+    Mirrors ContractionState.contract's list manipulation exactly."""
+    state = ContractionState.initial(inst)
+    trees: list = list(range(len(inst.inputs)))
+    for a in actions:
+        x, y = state.incidence[a]
+        node = [trees[x], trees[y]]
+        keep = [t for i, t in enumerate(trees) if i not in (x, y)]
+        keep.append(node)
+        trees = keep
+        state = state.contract(a)
+    assert len(trees) == 1
+    return trees[0]
+
+
 def linearize_tree(inst: Instance, tree: list | int) -> list[int]:
     """Convert an oracle binary tree (shared nested-list format) into an
     equivalent index-elimination sequence for the sequential MDP.

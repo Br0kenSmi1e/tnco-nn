@@ -1,0 +1,6 @@
+policy-best     ntrials=1 niters=  250: ['73.415', '74.414']
+policy-best     ntrials=1 niters= 1000: ['72.182', '74.150']
+policy-median   ntrials=1 niters=  250: ['74.480', '73.427']
+policy-median   ntrials=1 niters= 1000: ['73.348', '72.444']
+greedy          ntrials=1 niters=  250: ['75.181', '73.571']
+greedy          ntrials=1 niters= 1000: ['71.122', '75.095']

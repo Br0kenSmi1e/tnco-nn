@@ -179,6 +179,29 @@ with training data self-generated from SA traces. Cheapest mechanism probe:
 hand-crafted proposal bias (e.g. cost-density-weighted subtree selection)
 before any NN.**
 
+**Experiment 7 — init paradox confirmed (6 seeds); selector mechanism
+validated (the positive result).** Hybrid, W=1000, 6 seeds, rr_n500_d3:
+policy-init 72.42 ± 0.4, greedy-init 71.25 ± 0.2, random-init 71.90 ± 0.9.
+Init ranking by final quality is INVERTED vs init-tree cost (policy 104.4
+< greedy 132.0 < random ~200). Learned-init direction CLOSED: basin
+connectivity, not starting cost, determines SA outcome; low-cost sequential
+policy trees occupy narrow isolated basins.
+
+Selector probe (sa_selector.jl: TreeSA with pluggable rule selector;
+random-selector mode reproduces TreeSA statistically): eps_greedy(0.3)
+rule selection vs uniform-random, W=250, 3 seeds: rr_n500_d3: 71.30 vs
+73.38 (eps_greedy at W=250 MATCHES random-selector at W=16000, i.e. ~64x
+budget compression); er_n200: 334.2 vs 339.4 (~32x FLOPs better);
+rr_n500_d5: no effect (noise). Mechanism established: on unsaturated
+landscapes the proposal selector is the bottleneck; even a myopic
+1-step-greedy bias helps substantially. This is the opening for a LEARNED
+selector (must beat 1-step-greedy, e.g. via lookahead/global features).
+
+**Next investments:** (1) strengthen selector result: persistence at
+W=16000, eps sweep, greedy1 vs eps_greedy, n=1000, more seeds;
+(2) design learned rule selector (features from tcsc_diff deltas + local
+tree context; training from self-generated SA traces).
+
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
 contribution is the amortization story or harder families (Sycamore-like).

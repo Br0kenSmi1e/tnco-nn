@@ -225,6 +225,30 @@ claim, weaker). A third NN role with free supervision: visit scheduling
 n=1000, er_n200 at higher W); (2) learned selector with branch-label
 training; (3) visit-scheduler probe.
 
+**Experiment 9 — affinity learnability probe (GPU-only; decides whether a
+learned global-structure prior can exist).** Target: LCA cluster size of
+tensor pairs in oracle trees (linearization-invariant). Model: GNN
+embeddings + pair decoder; control: graph shortest-path distance. Val
+Spearman (held-out instances): lattices GNN 0.79 (0.98 with random node
+ids) vs control 0.37 — structure IS learnable on geometric families.
+Random-regular: GNN 0.12 (0.16 with RNI) vs control 0.34 — NOT learnable
+beyond graph distance; RNI ablation shows symmetry-breaking is not the
+bottleneck (train MSE collapses to 0.002 = memorization; val barely
+moves): the information is not present locally. ER similar (0.13 vs 0.34,
+small n).
+Consequence: a learned tree-structure prior is viable only for structured
+(geometric) families. The instances where TreeSA is unsaturated and the
+quality prize lives (er_n200, rr_n500_d5, n=1000) are exactly the
+irregular ones where the prior is not learnable. Learned-global-structure
+direction CLOSED for general/random networks (init paradox + this
+learnability negative); remains open for circuit/lattice-like families
+only.
+
+**Surviving directions:** (1) non-learned selector improvements (greedy2
+already beats best-known; worth polishing as its own result); (2) learned
+rule selector / visit scheduler — needs CPU-generated SA traces (paused);
+(3) premise test SABipartite vs greedy2-SA (CPU, paused).
+
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
 contribution is the amortization story or harder families (Sycamore-like).

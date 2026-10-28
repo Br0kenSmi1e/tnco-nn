@@ -48,13 +48,61 @@ function select_rule(dEs)
     end
 end
 
+# ---- 2-step lookahead support (selector == "greedy2") ----
+# Snapshot/restore of the 2-level neighborhood a rule can mutate.
+function snapshot_nbhd(tree)
+    L, R = tree.left, tree.right
+    lsnap = OECO.isleaf(L) ? nothing : (L.left, L.right, L.info)
+    rsnap = OECO.isleaf(R) ? nothing : (R.left, R.right, R.info)
+    return (L, R, lsnap, rsnap)
+end
+function restore_nbhd!(tree, snap)
+    L, R, lsnap, rsnap = snap
+    tree.left, tree.right = L, R
+    if lsnap !== nothing
+        L.left, L.right, L.info = lsnap
+    end
+    if rsnap !== nothing
+        R.left, R.right, R.info = rsnap
+    end
+    return tree
+end
+
+# best immediate dtc available at a child subtree (0 if no rule applies)
+function best_child_dtc(sub, log2_sizes)
+    rst = OECO.ruleset(OECO.TreeDecomp(), sub)
+    isempty(rst) && return 0.0
+    return minimum(d[2] - d[1] for d in
+                   (OECO.tcsc_diff(sub, r, log2_sizes, false) for r in rst))
+end
+
+function select_rule_lookahead(tree, rst, diffs, dEs, log2_sizes)
+    best_i, best_score = 1, Inf
+    for i in 1:length(rst)
+        snap = snapshot_nbhd(tree)
+        OECO.update_tree!(tree, rst[i], diffs[i][6])
+        future = min(best_child_dtc(tree.left, log2_sizes),
+                     best_child_dtc(tree.right, log2_sizes))
+        restore_nbhd!(tree, snap)
+        score = dEs[i] + min(0.0, future)
+        if score < best_score
+            best_score, best_i = score, i
+        end
+    end
+    return best_i
+end
+
 function sa_sweep!(tree, β, log2_sizes)
     rst = OECO.ruleset(OECO.TreeDecomp(), tree)
     if !isempty(rst)
         # evaluate all applicable rules (selector needs their deltas)
         diffs = [OECO.tcsc_diff(tree, r, log2_sizes, false) for r in rst]
         dEs = [d[2] - d[1] for d in diffs]
-        i = select_rule(dEs)
+        i = if selector == "greedy2"
+            select_rule_lookahead(tree, rst, diffs, dEs, log2_sizes)
+        else
+            select_rule(dEs)
+        end
         if rand() < exp(-β * dEs[i])  # Metropolis
             OECO.update_tree!(tree, rst[i], diffs[i][6])
         end

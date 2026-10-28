@@ -1,0 +1,6 @@
+rr_n500_d3_c2_s0.json greedy2 W=250 seed=23 tc=70.742
+rr_n500_d3_c2_s0.json greedy2 W=250 seed=21 tc=70.578
+rr_n500_d3_c2_s0.json greedy2 W=250 seed=22 tc=70.711
+er_n200_p0.05_c2_s0.json greedy2 W=250 seed=22 tc=334.748
+er_n200_p0.05_c2_s0.json greedy2 W=250 seed=21 tc=331.820
+er_n200_p0.05_c2_s0.json greedy2 W=250 seed=23 tc=330.912

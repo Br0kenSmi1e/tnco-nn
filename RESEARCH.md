@@ -197,10 +197,33 @@ landscapes the proposal selector is the bottleneck; even a myopic
 1-step-greedy bias helps substantially. This is the opening for a LEARNED
 selector (must beat 1-step-greedy, e.g. via lookahead/global features).
 
-**Next investments:** (1) strengthen selector result: persistence at
-W=16000, eps sweep, greedy1 vs eps_greedy, n=1000, more seeds;
-(2) design learned rule selector (features from tcsc_diff deltas + local
-tree context; training from self-generated SA traces).
+**Experiment 8 — selector plateau study (rr_n500_d3, 3 seeds each):**
+
+| selector | W=250 | W=1000 | W=4000 |
+|---|---|---|---|
+| random (=TreeSA) | 73.38 | 71.92 | 71.54 |
+| eps_greedy(0.3) | 71.30 | 71.16 | pending |
+| greedy1 | 71.19 | 71.16 | 71.04 |
+| greedy2 (2-step lookahead) | **70.68** | pending | pending |
+
+Previous best-known on this instance (random selector, W=16000): 71.04.
+**greedy2 at W=250 (64x less budget) beats it by ~0.35 tc (~27% FLOPs).**
+On er_n200 W=250: greedy2 331.8 < eps_greedy 334.2 < random 339.4.
+Selector quality improves the PLATEAU, not just convergence speed.
+Instrumented run (sa_stats.jl): fraction of visited nodes offering an
+improving rule falls from ~52% (beta=0) to ~3-5% late in annealing —
+most late-stage node evaluations are wasted (motivates a visit scheduler).
+
+**Sharpened research question:** can a LEARNED selector beat greedy2?
+Win conditions: (a) better plateau via learned >2-step lookahead patterns
+(trainable with branch-labels: apply rule, continue K sweeps, measure);
+(b) greedy2 quality at greedy1 per-sweep cost (distillation; engineering
+claim, weaker). A third NN role with free supervision: visit scheduling
+(predict nodes with no improving rule; skip ~95% of late-stage evals).
+
+**Next investments:** (1) plateau study completion (greedy2 at higher W,
+n=1000, er_n200 at higher W); (2) learned selector with branch-label
+training; (3) visit-scheduler probe.
 
 **Open framing tension:** if saturation holds at larger n too, a pure
 quality win over TreeSA may not exist on these families; the fallback
